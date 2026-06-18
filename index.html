@@ -1,168 +1,206 @@
 <!doctype html>
 <html lang="nl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Care4Connect AI</title>
-  <style>
-    :root{--blue:#0066ff;--green:#00c389;--bg:#f8fafc;--text:#1e293b;--dark:#0f172a;--card:#fff}
-    *{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text)}
-    .app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
-    aside{background:var(--dark);color:white;padding:26px;position:sticky;top:0;height:100vh}
-    h1{font-size:24px;margin:0 0 8px}.logo{font-weight:900}.logo span{color:var(--green)}
-    .tag{color:#cbd5e1;margin:0 0 26px}
-    .nav button{display:block;width:100%;text-align:left;background:#1e293b;color:white;border:0;border-radius:14px;padding:14px 16px;margin:8px 0;cursor:pointer;font-weight:700}
-    .nav button:hover,.nav button.active{background:var(--blue)}
-    main{padding:34px;max-width:1180px}
-    .hero{background:linear-gradient(135deg,var(--blue),#003d99);color:white;border-radius:28px;padding:30px;margin-bottom:22px}
-    .hero h2{margin:0;font-size:34px}.hero p{opacity:.9;font-size:18px}
-    .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
-    .card,.panel{background:var(--card);border-radius:24px;padding:22px;box-shadow:0 12px 35px rgba(15,23,42,.08);border:1px solid #e2e8f0}
-    .kpi{font-size:32px;font-weight:900;color:var(--blue)}
-    section{display:none}.show{display:block}
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-    label{font-weight:800;font-size:14px}
-    input,select,textarea{width:100%;padding:13px;border:1px solid #cbd5e1;border-radius:14px;margin:7px 0 14px;font:inherit;background:white}
-    textarea{min-height:130px}
-    .btn{border:0;border-radius:16px;padding:14px 18px;font-weight:900;cursor:pointer;margin:6px 8px 12px 0}
-    .primary{background:var(--blue);color:white}.green{background:var(--green);color:white}.ghost{background:#e2e8f0;color:#0f172a}
-    .output{white-space:pre-wrap;background:#f1f5f9;border-radius:18px;padding:18px;border:1px solid #e2e8f0;line-height:1.55}
-    .score{font-size:54px;font-weight:900;color:var(--blue)}
-    .badge{display:inline-block;background:#dcfce7;color:#166534;border-radius:999px;padding:7px 12px;font-weight:800;margin-bottom:12px}
-    @media(max-width:900px){.app{grid-template-columns:1fr}aside{height:auto;position:relative}.cards,.grid{grid-template-columns:1fr}main{padding:18px}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Care4Connect AI v2</title>
+<style>
+:root{--blue:#0066ff;--green:#00c389;--bg:#f8fafc;--text:#1e293b;--dark:#0f172a;--muted:#64748b;--card:#fff;--line:#e2e8f0}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text)}
+.app{display:grid;grid-template-columns:290px 1fr;min-height:100vh}
+aside{background:var(--dark);color:white;padding:26px;position:sticky;top:0;height:100vh}
+.logo{font-size:24px;font-weight:900;margin:0}.logo span{color:var(--green)}
+.tag{color:#cbd5e1;margin:8px 0 24px}
+.nav button{width:100%;text-align:left;background:#1e293b;color:white;border:0;border-radius:14px;padding:14px 16px;margin:7px 0;cursor:pointer;font-weight:800}
+.nav button:hover,.nav button.active{background:var(--blue)}
+main{padding:34px;max-width:1200px;width:100%}
+section{display:none}.show{display:block}
+.hero{background:linear-gradient(135deg,#0066ff,#003b91);color:white;border-radius:30px;padding:32px;margin-bottom:22px}
+.hero h1{font-size:38px;margin:0 0 10px}.hero p{font-size:18px;opacity:.92}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 12px 35px rgba(15,23,42,.08)}
+.kpi{font-size:34px;font-weight:900;color:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+label{font-weight:900;font-size:14px}
+input,select,textarea{width:100%;padding:13px;border:1px solid #cbd5e1;border-radius:14px;margin:7px 0 14px;font:inherit;background:white}
+textarea{min-height:140px}
+.btn{border:0;border-radius:16px;padding:14px 18px;font-weight:900;cursor:pointer;margin:6px 8px 12px 0}
+.primary{background:var(--blue);color:white}.green{background:var(--green);color:white}.ghost{background:#e2e8f0;color:#0f172a}.danger{background:#fee2e2;color:#991b1b}
+.output{white-space:pre-wrap;background:#f1f5f9;border-radius:18px;padding:18px;border:1px solid var(--line);line-height:1.55;margin-top:10px}
+.msgbox{background:#f8fafc;border:1px solid var(--line);border-radius:18px;padding:18px;margin:14px 0}
+.msgbox h3{margin-top:0}.small{color:var(--muted);font-size:14px}.score{font-size:56px;font-weight:900;color:var(--blue)}
+.badge{display:inline-block;background:#dcfce7;color:#166534;border-radius:999px;padding:7px 12px;font-weight:900;margin-bottom:12px}
+.warning{background:#fff7ed;color:#9a3412;border:1px solid #fed7aa;border-radius:16px;padding:14px;margin:12px 0}
+.bottom{display:none}
+@media(max-width:900px){
+.app{display:block}aside{height:auto;position:relative;padding:18px}.nav{display:none}
+main{padding:16px}.cards,.grid{grid-template-columns:1fr}.hero h1{font-size:28px}
+.bottom{display:flex;position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid var(--line);z-index:99}
+.bottom button{flex:1;border:0;background:white;padding:10px 4px;font-size:12px;font-weight:800;color:#0f172a}
+body{padding-bottom:62px}
+}
+</style>
 </head>
 <body>
 <div class="app">
-  <aside>
-    <h1 class="logo">Care4<span>Connect</span> AI</h1>
-    <p class="tag">Meer reacties. Minder ghosting.</p>
-    <div class="nav">
-      <button class="active" onclick="tab('dashboard',this)">Dashboard</button>
-      <button onclick="tab('generator',this)">Berichtgenerator</button>
-      <button onclick="tab('persona',this)">Persona Builder</button>
-      <button onclick="tab('hooks',this)">50 Hooks</button>
-      <button onclick="tab('followup',this)">Follow-ups</button>
-      <button onclick="tab('ghosting',this)">Ghosting Recovery</button>
-      <button onclick="tab('optimizer',this)">Open Rate Optimizer</button>
-      <button onclick="tab('vacature',this)">Vacature → Bericht</button>
+<aside>
+  <p class="logo">Care4<span>Connect</span> AI</p>
+  <p class="tag">LinkedIn recruitment messaging voor de zorg.</p>
+  <div class="nav">
+    <button class="active" onclick="tab('dashboard',this)">Dashboard</button>
+    <button onclick="tab('generator',this)">Berichtgenerator</button>
+    <button onclick="tab('vacature',this)">Vacature → Bericht</button>
+    <button onclick="tab('optimizer',this)">Optimizer</button>
+    <button onclick="tab('persona',this)">Persona</button>
+    <button onclick="tab('hooks',this)">Hooks</button>
+    <button onclick="tab('followup',this)">Follow-ups</button>
+    <button onclick="tab('ghosting',this)">Ghosting</button>
+    <button onclick="tab('analytics',this)">Analytics</button>
+  </div>
+</aside>
+
+<main>
+<section id="dashboard" class="show">
+  <div class="hero">
+    <h1>Meer reacties. Minder ghosting.</h1>
+    <p>Maak warme, directe LinkedIn-berichten zonder corporate recruitmenttaal.</p>
+    <button class="btn green" onclick="go('generator')">Maak mijn eerste bericht</button>
+  </div>
+  <div class="cards">
+    <div class="card"><b>Berichten</b><div id="kpiMsg" class="kpi">0</div></div>
+    <div class="card"><b>Gem. score</b><div id="kpiScore" class="kpi">87</div></div>
+    <div class="card"><b>Kopieën</b><div id="kpiCopy" class="kpi">0</div></div>
+    <div class="card"><b>Kosten</b><div class="kpi">€0</div></div>
+  </div>
+  <div class="panel">
+    <span class="badge">Care4Group Mode actief</span>
+    <h2>Warm. Kort. Menselijk.</h2>
+    <p>Geen “dynamische organisatie”. Geen “uitdagende functie”. Wel berichten die voelen alsof ze door een mens geschreven zijn.</p>
+  </div>
+</section>
+
+<section id="generator">
+  <div class="panel">
+    <h2>AI Berichtgenerator</h2>
+    <div class="grid">
+      <div><label>Functie</label><select id="functie"><option>Verzorgende IG</option><option>Verpleegkundige</option><option>Helpende</option><option>Doktersassistent</option><option>POH-GGZ</option><option>Begeleider</option><option>Zorgmanager</option><option>Recruitment Specialist</option></select></div>
+      <div><label>Regio</label><input id="regio" value="Rotterdam"></div>
+      <div><label>Salaris</label><input id="salaris" value="€3.800"></div>
+      <div><label>Uren</label><input id="uren" value="24-32 uur"></div>
+      <div><label>Belangrijkste trigger</label><select id="trigger"><option>Meer rust</option><option>Beter rooster</option><option>Meer waardering</option><option>Meer ownership</option><option>Kortere reistijd</option><option>Meer invloed</option></select></div>
+      <div><label>Tone of voice</label><select id="tone"><option>Care4Group</option><option>Warm</option><option>Direct</option><option>Nieuwsgierig</option></select></div>
     </div>
-  </aside>
+    <button class="btn primary" onclick="generate()">Genereer alles</button>
+    <div id="result"></div>
+  </div>
+</section>
 
-  <main>
-    <section id="dashboard" class="show">
-      <div class="hero">
-        <h2>Zorgrecruitment berichten die wél gelezen worden.</h2>
-        <p>Voor LinkedIn, InMail, WhatsApp, SMS en follow-ups.</p>
-      </div>
-      <div class="cards">
-        <div class="card"><b>Berichten</b><div class="kpi" id="kpiMsg">0</div></div>
-        <div class="card"><b>Gem. score</b><div class="kpi" id="kpiScore">87</div></div>
-        <div class="card"><b>Hooks</b><div class="kpi">50</div></div>
-        <div class="card"><b>API kosten</b><div class="kpi">€0</div></div>
-      </div>
-      <div class="panel">
-        <span class="badge">Care4Group Mode actief</span>
-        <h3>Warm. Direct. Geen corporate taal.</h3>
-        <p>Klik links op <b>Berichtgenerator</b> om je eerste bericht te maken.</p>
-      </div>
-    </section>
+<section id="vacature">
+  <div class="panel">
+    <h2>Vacature → Message Generator</h2>
+    <textarea id="vacatureText" placeholder="Plak hier de vacaturetekst of LinkedIn outreach..."></textarea>
+    <button class="btn primary" onclick="vacature()">Analyseer en genereer</button>
+    <div id="vacatureOut"></div>
+  </div>
+</section>
 
-    <section id="generator">
-      <div class="panel">
-        <h2>AI Bericht Generator</h2>
-        <div class="grid">
-          <div><label>Functie</label><select id="functie"><option>Verzorgende IG</option><option>Verpleegkundige</option><option>Helpende</option><option>Doktersassistent</option><option>POH-GGZ</option><option>Begeleider</option><option>Zorgmanager</option></select></div>
-          <div><label>Regio</label><input id="regio" value="Rotterdam"></div>
-          <div><label>Salaris</label><input id="salaris" value="€3.800"></div>
-          <div><label>Uren</label><input id="uren" value="24-32 uur"></div>
-        </div>
-        <button class="btn primary" onclick="generate()">Genereer berichten</button>
-        <button class="btn ghost" onclick="copy('result')">Kopieer output</button>
-        <div id="result" class="output">Je output verschijnt hier.</div>
-      </div>
-    </section>
+<section id="optimizer">
+  <div class="panel">
+    <h2>Open Rate Optimizer</h2>
+    <textarea id="optText" placeholder="Plak je bericht hier..."></textarea>
+    <button class="btn green" onclick="optimize()">Analyseer bericht</button>
+    <div id="score" class="score"></div>
+    <div id="feedback" class="output"></div>
+  </div>
+</section>
 
-    <section id="persona">
-      <div class="panel">
-        <h2>Candidate Persona Builder</h2>
-        <select id="personaFunctie"><option>Verzorgende IG</option><option>Verpleegkundige</option><option>Helpende</option><option>Doktersassistent</option><option>POH-GGZ</option><option>Begeleider</option></select>
-        <button class="btn primary" onclick="makePersona()">Maak persona</button>
-        <div id="personaOut" class="output"></div>
-      </div>
-    </section>
+<section id="persona">
+  <div class="panel">
+    <h2>Candidate Persona Builder</h2>
+    <select id="personaFunctie"><option>Verzorgende IG</option><option>Verpleegkundige</option><option>Helpende</option><option>Doktersassistent</option><option>POH-GGZ</option><option>Begeleider</option><option>Recruitment Specialist</option></select>
+    <button class="btn primary" onclick="makePersona()">Maak persona</button>
+    <div id="personaOut" class="output"></div>
+  </div>
+</section>
 
-    <section id="hooks">
-      <div class="panel">
-        <h2>LinkedIn Hook Generator</h2>
-        <button class="btn primary" onclick="makeHooks()">Genereer 50 hooks</button>
-        <button class="btn ghost" onclick="copy('hooksOut')">Kopieer hooks</button>
-        <div id="hooksOut" class="output"></div>
-      </div>
-    </section>
+<section id="hooks">
+  <div class="panel">
+    <h2>50 LinkedIn Hooks</h2>
+    <button class="btn primary" onclick="makeHooks()">Genereer 50 hooks</button>
+    <button class="btn ghost" onclick="copyText(document.getElementById('hooksOut').innerText)">Kopieer alles</button>
+    <div id="hooksOut" class="output"></div>
+  </div>
+</section>
 
-    <section id="followup">
-      <div class="panel">
-        <h2>Follow-up Generator</h2>
-        <button class="btn primary" onclick="makeFollowups()">Maak follow-ups</button>
-        <div id="followOut" class="output"></div>
-      </div>
-    </section>
+<section id="followup">
+  <div class="panel">
+    <h2>Follow-up Generator</h2>
+    <button class="btn primary" onclick="makeFollowups()">Maak follow-ups</button>
+    <div id="followOut"></div>
+  </div>
+</section>
 
-    <section id="ghosting">
-      <div class="panel">
-        <h2>Ghosting Recovery Generator</h2>
-        <button class="btn primary" onclick="makeGhosting()">Maak recovery berichten</button>
-        <div id="ghostOut" class="output"></div>
-      </div>
-    </section>
+<section id="ghosting">
+  <div class="panel">
+    <h2>Ghosting Recovery</h2>
+    <button class="btn primary" onclick="makeGhosting()">Maak recovery berichten</button>
+    <div id="ghostOut"></div>
+  </div>
+</section>
 
-    <section id="optimizer">
-      <div class="panel">
-        <h2>Open Rate Optimizer</h2>
-        <textarea id="optText" placeholder="Plak je LinkedIn bericht hier..."></textarea>
-        <button class="btn green" onclick="optimize()">Analyseer bericht</button>
-        <div class="score" id="score"></div>
-        <div id="feedback" class="output"></div>
-      </div>
-    </section>
+<section id="analytics">
+  <div class="panel">
+    <h2>Analytics</h2>
+    <div class="cards">
+      <div class="card"><b>Berichten gemaakt</b><div id="aMsg" class="kpi">0</div></div>
+      <div class="card"><b>Berichten gekopieerd</b><div id="aCopy" class="kpi">0</div></div>
+      <div class="card"><b>Laatste score</b><div id="aScore" class="kpi">87</div></div>
+      <div class="card"><b>Status</b><div class="kpi">Live</div></div>
+    </div>
+    <button class="btn danger" onclick="resetStats()">Reset analytics</button>
+  </div>
+</section>
+</main>
+</div>
 
-    <section id="vacature">
-      <div class="panel">
-        <h2>Vacature → Message Generator</h2>
-        <textarea id="vacatureText" placeholder="Plak vacaturetekst..."></textarea>
-        <button class="btn primary" onclick="vacature()">Genereer vanuit vacature</button>
-        <div id="vacatureOut" class="output"></div>
-      </div>
-    </section>
-  </main>
+<div class="bottom">
+<button onclick="go('dashboard')">Home</button>
+<button onclick="go('generator')">Bericht</button>
+<button onclick="go('vacature')">Vacature</button>
+<button onclick="go('optimizer')">Score</button>
+<button onclick="go('analytics')">Stats</button>
 </div>
 
 <script>
-let count=0;
-function tab(id,btn){document.querySelectorAll('section').forEach(s=>s.classList.remove('show'));document.getElementById(id).classList.add('show');document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
-function d(){return {f:functie.value,r:regio.value,s:salaris.value,u:uren.value}}
-function bump(){count++;kpiMsg.innerText=count}
+const stats=JSON.parse(localStorage.getItem("careStats")||'{"msg":0,"copy":0,"score":87}');
+function save(){localStorage.setItem("careStats",JSON.stringify(stats));renderStats()}
+function renderStats(){kpiMsg.innerText=stats.msg;kpiCopy.innerText=stats.copy;kpiScore.innerText=stats.score;aMsg.innerText=stats.msg;aCopy.innerText=stats.copy;aScore.innerText=stats.score}
+renderStats();
+
+function tab(id,btn){document.querySelectorAll("section").forEach(s=>s.classList.remove("show"));document.getElementById(id).classList.add("show");document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));if(btn)btn.classList.add("active")}
+function go(id){tab(id,document.querySelector(`.nav button[onclick*="${id}"]`))}
+function incMsg(){stats.msg++;save()}
+function copyText(t){navigator.clipboard.writeText(t);stats.copy++;save();alert("Gekopieerd.")}
+
+function box(title,text){
+return `<div class="msgbox"><h3>${title}</h3><div class="output" id="${title.replaceAll(' ','_')}">${text}</div><button class="btn ghost" onclick="copyText(document.getElementById('${title.replaceAll(' ','_')}').innerText)">Kopieer ${title}</button></div>`
+}
+
+function values(){return{f:functie.value,r:regio.value,s:salaris.value,u:uren.value,tr:trigger.value}}
 
 function generate(){
-const x=d(); bump();
-result.innerText =
-`CONNECTIEVERZOEK
-
-Hoi [Naam],
+const x=values();incMsg();
+let connect=`Hoi [Naam],
 
 Ik zag je profiel voorbij komen en moest denken aan iets waar veel ${x.f}'s mee zitten.
 
-Meer rust. Minder gedoe. En gewoon goede zorg kunnen leveren.
+${x.tr}. Minder gedoe. En gewoon goed werk kunnen leveren.
 
 Ik zoek iemand als ${x.f} in regio ${x.r}.
 
-Zullen we linken?
+Zullen we linken?`;
 
-
-EERSTE LINKEDIN BERICHT
-
-Hoi [Naam],
+let linkedin=`Hoi [Naam],
 
 Waarschijnlijk krijg je vaker berichten van recruiters.
 
@@ -172,19 +210,16 @@ Voor een organisatie in regio ${x.r} zoek ik een ${x.f} voor ${x.u}.
 
 Wat interessant kan zijn:
 
+✔ ${x.tr}
 ✔ Salaris: ${x.s}
-✔ Meer grip op je rooster
+✔ Duidelijke afspraken
 ✔ Een team waar je niet alleen staat
-✔ Gewoon goede zorg kunnen leveren
 
 Geen verkooppraatje.
 
-Sta je open voor een korte kennismaking?
+Sta je open voor een korte kennismaking?`;
 
-
-INMAIL
-
-Hoi [Naam],
+let inmail=`Hoi [Naam],
 
 Ik weet niet of je actief zoekt.
 
@@ -194,227 +229,203 @@ We zoeken een ${x.f} in regio ${x.r}. Voor ${x.u}.
 
 Niet omdat het “een mooie uitdaging” is.
 
-Maar omdat je hier de ruimte krijgt om je werk goed te doen. Met minder ruis. Meer waardering. En duidelijke afspraken.
+Maar omdat je hier meer ruimte krijgt om je werk goed te doen.
 
-Mag ik je kort vertellen waarom ik aan jou dacht?
+Mag ik je kort vertellen waarom ik aan jou dacht?`;
 
-
-WHATSAPP
-
-Hoi [Naam], met [Recruiter].
+let whatsapp=`Hoi [Naam], met [Recruiter].
 
 Ik zag je profiel en dacht aan een rol als ${x.f} in regio ${x.r}.
 
 Geen lang verhaal.
 
-Het gaat om ${x.u}, salaris ${x.s}, en een plek waar je gewoon goede zorg kunt leveren.
+Het gaat om ${x.u}, salaris ${x.s}, en vooral: ${x.tr.toLowerCase()}.
 
-Zal ik je kort iets sturen?
+Zal ik je kort iets sturen?`;
+
+let sms=`Hoi [Naam], met [Recruiter]. Ik heb een rol als ${x.f} in regio ${x.r}. ${x.u}. Sta je open voor korte info?`;
+
+let abc=`VARIANT A - focus op ${x.tr}
+
+Hoi [Naam], ik zag je profiel en dacht aan een rol als ${x.f} waar ${x.tr.toLowerCase()} centraal staat. Mag ik je kort vertellen waarom?
 
 
-SMS
+VARIANT B - focus op zekerheid
 
-Hoi [Naam], met [Recruiter]. Ik heb een rol als ${x.f} in regio ${x.r}. ${x.u}. Sta je open voor korte info?`;
+Hoi [Naam], ik zoek een ${x.f} in regio ${x.r}. Duidelijke afspraken, ${x.u}, salaris ${x.s}. Is korte info welkom?
+
+
+VARIANT C - focus op nieuwsgierigheid
+
+Hoi [Naam], misschien totaal niet relevant, maar je profiel viel me op. Mag ik je één korte vraag stellen over een rol als ${x.f}?`;
+
+result.innerHTML=box("Connectieverzoek",connect)+box("LinkedIn bericht",linkedin)+box("InMail",inmail)+box("WhatsApp",whatsapp)+box("SMS",sms)+box("A/B/C Test",abc);
+}
+
+function optimize(){
+let t=optText.value.toLowerCase(),sc=100,fb=[];
+if(t.length>900){sc-=15;fb.push("Maak het korter. Lange berichten voelen zwaar.")}
+if(!t.includes("?")){sc-=10;fb.push("Sluit af met één simpele vraag.")}
+if(/uitdagende functie|dynamische organisatie|marktconform|spin in het web|hands-on mentaliteit/.test(t)){sc-=25;fb.push("Haal corporate taal eruit.")}
+if(!/(rust|waardering|rooster|team|zorg|ownership|invloed|autonomie)/.test(t)){sc-=15;fb.push("Voeg een duidelijke trigger toe: rust, waardering, rooster, ownership of invloed.")}
+if(!/(ik zag|viel me op|dacht aan jou|profiel)/.test(t)){sc-=10;fb.push("Maak de opening persoonlijker.")}
+if(/contactgegevens|cv sturen|solliciteren/.test(t)){sc-=10;fb.push("Vraag niet direct om contactgegevens of cv. Maak de CTA kleiner.")}
+sc=Math.max(sc,0);stats.score=sc;save();
+score.innerText=sc+"/100";
+feedback.innerText=fb.length?fb.join("\n"):"Sterk bericht. Kort, menselijk, concreet en laagdrempelig.";
+}
+
+function vacature(){
+let raw=vacatureText.value;
+let lower=raw.toLowerCase();
+let functieGuess=lower.includes("recruitment")?"Recruitment Specialist":lower.includes("verpleeg")?"Verpleegkundige":lower.includes("verzorgende")?"Verzorgende IG":"zorgprofessional";
+let regioGuess=(raw.match(/(Rotterdam|Amsterdam|Utrecht|Eindhoven|Breda|Tilburg|Den Haag|Sittard|Geleen|Dordrecht|Boels)/i)||["jouw regio"])[0];
+let triggerGuess=lower.includes("ownership")?"ownership":lower.includes("invloed")?"invloed":lower.includes("rooster")?"meer grip op je rooster":"meer rust en duidelijkheid";
+incMsg();
+let analysis=`Analyse
+
+Functie gevonden: ${functieGuess}
+Regio/organisatie gevonden: ${regioGuess}
+Belangrijkste trigger: ${triggerGuess}
+
+Verbeteradvies:
+- Maak de eerste zin persoonlijker.
+- Vraag niet meteen om contactgegevens.
+- Sluit af met een kleine ja/nee-vraag.`;
+
+let msg=`Hoi [Naam],
+
+Ik zag je profiel en moest aan je denken.
+
+Niet voor zomaar een vacature.
+
+Maar voor een rol als ${functieGuess} waarin je vooral meer ${triggerGuess} krijgt.
+
+Wat mij interessant lijkt:
+✔ Niet alleen uitvoeren
+✔ Echt meedenken
+✔ Dicht op de business
+✔ Ruimte om recruitment slimmer te maken
+
+Geen lang verhaal.
+
+Zal ik je kort vertellen waarom ik aan jou dacht?`;
+
+let inm=`Hoi [Naam],
+
+Ik kwam je profiel tegen en dacht: dit zou opvallend goed kunnen passen.
+
+Het gaat om een rol als ${functieGuess} bij ${regioGuess}.
+
+Vooral interessant als je toe bent aan meer ${triggerGuess}, korte lijnen en een rol waarin je niet alleen vacatures invult.
+
+Mag ik je de korte versie sturen?`;
+
+vacatureOut.innerHTML=box("Vacature Analyse",analysis)+box("LinkedIn versie",msg)+box("InMail versie",inm);
 }
 
 function makePersona(){
 let f=personaFunctie.value;
-personaOut.innerText =
-`PERSONA: ${f}
+personaOut.innerText=`PERSONA: ${f}
 
 Motivaties:
-- Rust in het rooster
+- Meer rust
 - Waardering
-- Fijne collega’s
-- Minder administratie
-- Gewoon goede zorg kunnen leveren
+- Autonomie
+- Duidelijke afspraken
+- Werk dat ertoe doet
 
 Frustraties:
-- Onderbezetting
-- Hoge werkdruk
-- Te veel wisselende diensten
-- Managers die niet luisteren
-- Corporate beloftes die niet kloppen
+- Te veel druk
+- Te weinig invloed
+- Slechte communicatie
+- Corporate taal
+- Geen tijd om rustig te reageren
 
 Bezwaren:
-- Geen tijd om te reageren
-- Twijfel over nieuwe werkgever
-- Reistijd
-- Angst voor slechter rooster
-- Geen zin in recruiter-praat
+- Geen tijd
+- Twijfel over werkgever
+- Geen zin in verkooppraat
+- Onzeker over overstappen
 
 Triggerwoorden:
-rust, waardering, vast team, duidelijke afspraken, goede zorg, minder gedoe`;
+rust, waardering, autonomie, ownership, team, invloed, duidelijkheid`;
 }
 
 function makeHooks(){
-let base=[
+let h=[
 "Ik zag iets in jouw profiel dat me opviel...",
 "Waarschijnlijk ben je niet actief op zoek, maar...",
 "Normaal stuur ik dit soort berichten niet...",
 "Mag ik je iets kort vragen?",
 "Misschien totaal niet relevant, maar...",
 "Ik houd het kort, want je krijgt vast genoeg berichten.",
-"Ik ben benieuwd of jij nog energie krijgt van je huidige werkplek.",
+"Ik ben benieuwd of jij nog energie krijgt van je huidige rol.",
 "Wat zou er moeten veranderen voordat jij een overstap zou overwegen?",
 "Geen standaard recruitmentpraatje, beloofd.",
-"Ik zag je ervaring in de zorg en dacht: dit kan interessant zijn.",
-"Ben jij toe aan een plek waar je gewoon goede zorg kunt leveren?",
-"Ik weet niet of dit past, maar ik dacht aan jou.",
+"Ik zag je ervaring en dacht: dit kan interessant zijn.",
+"Heb je al eens aan deze stap gedacht?",
+"Ik weet niet of dit past, maar ik moest aan je denken.",
 "Geen haast, wel benieuwd hoe jij erin staat.",
 "Wat maakt voor jou een werkplek écht goed?",
-"Ik zoek geen cv. Ik zoek iemand die goede zorg belangrijk vindt."
+"Ik zoek geen cv. Ik zoek iemand die eigenaarschap belangrijk vindt."
 ];
-hooksOut.innerText=Array.from({length:50},(_,i)=>(i+1)+". "+base[i%base.length]).join("\\n");
+hooksOut.innerText=Array.from({length:50},(_,i)=>(i+1)+". "+h[i%h.length]).join("\n");
 }
 
 function makeFollowups(){
-followOut.innerText =
-`FOLLOW-UP NA 3 DAGEN
-
-Hoi [Naam],
+followOut.innerHTML=box("Follow-up 3 dagen",`Hoi [Naam],
 
 Ik weet dat LinkedIn-berichten snel verdwijnen.
 
-Ik zocht contact over een zorgrol die misschien goed bij je past.
+Ik zocht contact over een rol die misschien goed past.
 
-Is dit iets waar je voor openstaat, of totaal niet?
-
-
-FOLLOW-UP NA 7 DAGEN
-
-Hoi [Naam],
+Is dit iets waar je voor openstaat, of totaal niet?`)
++box("Follow-up 7 dagen",`Hoi [Naam],
 
 Geen zorgen als dit niet het moment is.
 
 Ik was vooral benieuwd wat voor jou belangrijk zou zijn als je ooit overstapt.
 
 Meer rust?
-Beter rooster?
+Meer invloed?
+Beter team?
 Meer waardering?
-Kortere reistijd?
 
-Benieuwd hoe jij daarin zit.
-
-
-FOLLOW-UP NA 14 DAGEN
-
-Hoi [Naam],
+Benieuwd hoe jij daarin zit.`)
++box("Follow-up 14 dagen",`Hoi [Naam],
 
 Ik laat je hierna met rust 😊
 
 Ik wilde alleen nog één keer checken of je nieuwsgierig bent.
 
-Als het niet past: ook helemaal goed.`;
+Als het niet past: ook helemaal goed.`);
 }
 
 function makeGhosting(){
-ghostOut.innerText =
-`VRIENDELIJK
-
-Hoi [Naam],
+ghostOut.innerHTML=box("Vriendelijk",`Hoi [Naam],
 
 Ik hoop dat alles goed gaat.
 
-Ik was benieuwd hoe het met je zoektocht staat.
-
-
-NIEUWSGIERIG
-
-Hoi [Naam],
+Ik was benieuwd of de rol nog interessant voor je is.`)
++box("Nieuwsgierig",`Hoi [Naam],
 
 Ik vroeg me af waar je momenteel het meeste waarde aan hecht in je werk.
 
-Rust, rooster, team of waardering?
+Rust, invloed, team of waardering?`)
++box("Humoristisch",`Hoi [Naam],
 
+Volgens mij is mijn vorige bericht ergens tussen de koffie en drukke agenda verdwenen 😄
 
-HUMORISTISCH
-
-Hoi [Naam],
-
-Volgens mij is mijn vorige bericht ergens tussen de koffie, overdracht en drukke dienst verdwenen 😄
-
-Ik dacht: ik probeer het nog één keer.
-
-
-DIRECT
-
-Hoi [Naam],
+Ik dacht: ik probeer het nog één keer.`)
++box("Direct",`Hoi [Naam],
 
 Ik zal niet blijven sturen.
 
-Maar ik ben benieuwd of er nog interesse is.`;
+Maar ik ben benieuwd of er nog interesse is.`);
 }
 
-function optimize(){
-let t=optText.value.toLowerCase(),sc=100,fb=[];
-if(t.length>900){sc-=15;fb.push("Maak het korter. Lange LinkedIn-berichten voelen snel zwaar.")}
-if(!t.includes("?")){sc-=10;fb.push("Sluit af met één simpele vraag.")}
-if(t.includes("uitdagende functie")||t.includes("dynamische organisatie")||t.includes("marktconform")||t.includes("spin in het web")){sc-=25;fb.push("Haal corporate taal eruit.")}
-if(!/(rust|waardering|rooster|team|zorg|gedoe)/.test(t)){sc-=15;fb.push("Voeg een zorg-trigger toe: rust, waardering, rooster, team of minder gedoe.")}
-if(!t.includes("hoi")){sc-=5;fb.push("Begin menselijk, bijvoorbeeld met 'Hoi [Naam]'.")}
-score.innerText=Math.max(sc,0)+"/100";
-feedback.innerText=fb.length?fb.join("\\n"):"Sterk bericht. Kort, menselijk, concreet en niet opdringerig.";
-kpiScore.innerText=Math.max(sc,0);
-}
-
-function vacature(){
-let v=vacatureText.value.trim(); bump();
-vacatureOut.innerText =
-`CONNECTIEVERZOEK
-
-Hoi [Naam],
-
-Ik zag je profiel en dacht: dit kan misschien relevant zijn.
-
-Ik zoek een zorgprofessional voor een rol waarbij rust, waardering en goede zorg centraal staan.
-
-Zullen we linken?
-
-
-LINKEDIN BERICHT
-
-Hoi [Naam],
-
-Ik houd het kort.
-
-Ik kwam je profiel tegen en dacht aan een zorgrol die mogelijk goed past.
-
-Geen standaard verhaal over een “dynamische organisatie”.
-
-Wel een plek waar je gewoon goede zorg kunt leveren, met duidelijke afspraken en een team dat naast je staat.
-
-Mag ik je kort vertellen waarom ik aan jou dacht?
-
-
-INMAIL
-
-Hoi [Naam],
-
-Ik weet niet of je actief zoekt.
-
-Maar op basis van je profiel dacht ik dat deze rol misschien interessant kan zijn.
-
-Vooral als je zoekt naar meer rust, duidelijkheid en een werkplek waar zorg weer centraal staat.
-
-Mag ik je de korte versie sturen?
-
-
-WHATSAPP
-
-Hoi [Naam], met [Recruiter].
-
-Ik zag je profiel en dacht aan een zorgfunctie die mogelijk past.
-
-Geen lang verhaal.
-
-Zal ik je kort iets sturen?`;
-}
-
-function copy(id){
-navigator.clipboard.writeText(document.getElementById(id).innerText);
-alert("Gekopieerd.");
-}
+function resetStats(){localStorage.removeItem("careStats");location.reload()}
 </script>
 </body>
 </html>
